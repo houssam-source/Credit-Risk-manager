@@ -1,0 +1,87 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data (keep raw and processed separate)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Models (large binary files - use Git LFS or external storage)
+src/models/outputs/*.pkl
+src/models/outputs/*.h5
+src/models/outputs/*.png
+!src/models/outputs/.gitkeep
+
+# Monitoring logs
+data/monitoring/*.csv
+!data/monitoring/.gitkeep
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+temp/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# mypy
+.mypy_cache/
+
+# Large data directories (HomeCredit dataset)
+home-credit-default-risk/data/*.csv
+home-credit-default-risk/data/processed/*
+!home-credit-default-risk/data/.gitkeep
+home-credit-default-risk/data/raw/*
+
+# Cache files
+__pycache__/
+*.pyc
+*.pyo

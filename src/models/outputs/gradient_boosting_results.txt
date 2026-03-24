@@ -1,0 +1,8 @@
+=== GRADIENT_BOOSTING MODEL RESULTS ===
+
+train_accuracy: 0.9231
+val_accuracy: 0.9191
+val_precision: 0.4816
+val_recall: 0.0342
+val_f1: 0.0639
+val_auc: 0.7651

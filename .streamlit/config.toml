@@ -1,0 +1,9 @@
+[server]
+headless = true
+port = $PORT
+address = "localhost"
+enableCORS = false
+enableXsrfProtection = true
+
+[browser]
+gatherUsageStats = false

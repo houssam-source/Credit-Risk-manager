@@ -1,0 +1,8 @@
+=== RANDOM_FOREST MODEL RESULTS ===
+
+train_accuracy: 0.9195
+val_accuracy: 0.9193
+val_precision: 1.0000
+val_recall: 0.0002
+val_f1: 0.0004
+val_auc: 0.7331

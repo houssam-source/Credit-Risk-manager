@@ -1,0 +1,8 @@
+=== NEURAL_NETWORK MODEL RESULTS ===
+
+train_accuracy: 0.9194
+val_accuracy: 0.9194
+val_precision: 1.0000
+val_recall: 0.0010
+val_f1: 0.0020
+val_auc: 0.7537
