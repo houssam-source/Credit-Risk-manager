@@ -9,6 +9,7 @@ streamlit==1.32.0
 plotly>=5.18.0
 seaborn>=0.12.0
 matplotlib>=3.7.0
-tensorflow-cpu==2.15.0
+# tensorflow-cpu removed - use simulated predictions on Streamlit Cloud
+# Install locally for real predictions via API
 scipy>=1.9.0
 requests>=2.31.0
