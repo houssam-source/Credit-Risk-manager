@@ -72,16 +72,16 @@ def app():
             project_root = Path(__file__).parent.parent.parent
             sys.path.append(str(project_root))
             
-            # Check if trained models exist
+            # Check if trained models exist and try to load them
             model_path = project_root / 'src' / 'models' / 'outputs'
             scaler_path = model_path / 'scaler.pkl'
+            use_real_model = False
             
-            if scaler_path.exists():
-                import joblib
-                from sklearn.ensemble import RandomForestClassifier
-                
-                # Try to load a model and make real prediction
-                try:
+            try:
+                if scaler_path.exists():
+                    import joblib
+                    from sklearn.ensemble import RandomForestClassifier
+                    
                     # Load scaler
                     scaler = joblib.load(scaler_path)
                     
@@ -90,31 +90,28 @@ def app():
                     if rf_model_path.exists():
                         model = joblib.load(rf_model_path)
                         
-                        # Prepare features for prediction
+                        # Prepare features for prediction - NOTE: This is simplified
+                        # In production, you'd need exact feature mapping from training
                         features = np.array([[income, credit_amount, income/credit_amount if credit_amount > 0 else 0, 
                                             age, external_score_1, external_score_2, external_score_3, 
                                             employment_length]]).reshape(1, -1)
                         
-                        # This is a simplified feature mapping - in reality, you'd need the exact features the model was trained on
-                        # For now, use the simulated function as backup
-                        risk_score = calculate_risk_score(income, credit_amount, age, external_score_1, 
-                                                         external_score_2, external_score_3, employment_length)
+                        # Successfully loaded model - would make real prediction here
+                        # For now, fall back to simulated since features don't match exactly
+                        use_real_model = False
                         
-                        st.info("Used simulated prediction model (real model loading requires exact feature mapping)")
-                    else:
-                        # Use simulated function if no model found
-                        risk_score = calculate_risk_score(income, credit_amount, age, external_score_1, 
-                                                         external_score_2, external_score_3, employment_length)
-                        
-                except Exception as e:
-                    st.warning(f"Could not load model for prediction: {str(e)}. Using simulated prediction.")
-                    risk_score = calculate_risk_score(income, credit_amount, age, external_score_1, 
-                                                     external_score_2, external_score_3, employment_length)
-            else:
-                # Use simulated function if no scaler found
-                risk_score = calculate_risk_score(income, credit_amount, age, external_score_1, 
-                                                 external_score_2, external_score_3, employment_length)
-                
+            except Exception as e:
+                # Expected on Streamlit Cloud - models not deployed
+                use_real_model = False
+            
+            # Always use simulated prediction function (works everywhere)
+            risk_score = calculate_risk_score(income, credit_amount, age, external_score_1, 
+                                             external_score_2, external_score_3, employment_length)
+            
+            # Show info badge if using demo mode
+            if not use_real_model:
+                st.info("ℹ️ **Demo Mode:** Using simulated predictions")
+
         except Exception as e:
             # Use simulated function if anything goes wrong
             st.warning(f"Error loading model: {str(e)}. Using simulated prediction.")
